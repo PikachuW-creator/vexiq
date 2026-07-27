@@ -1,0 +1,18 @@
+{
+	"extension": {
+		"version": "0.8.2026020401",
+		"json": 2
+	},
+	"project": {
+		"name": "WILLIAM",
+		"description": "",
+		"creationDate": "7/27/2026, 2:17:15 PM",
+		"platform": "IQ2",
+		"language": "python",
+		"slot": 1,
+		"sdkVersion": "IQ2_1_0_0_21",
+		"python": {
+			"main": "src/main.py"
+		}
+	}
+}
