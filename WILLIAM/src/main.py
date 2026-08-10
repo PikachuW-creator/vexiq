@@ -14,11 +14,13 @@ from vex import *
 brain=Brain()
 right_drive_motor = Motor(Ports.PORT6)
 left_drive_motor = Motor(Ports.PORT1)
+claw_motor = Motor(Ports.PORT4) 
 
 controller = Controller()
+
 #brain.screen.print("WILLIAM HELLO!")
 
-count = 0
+
 def main():
     while True:
         right_velocity = controller.axisD.position()
@@ -26,4 +28,7 @@ def main():
         left_velocity = controller.axisA.position()
         left_drive_motor.spin(FORWARD, left_velocity, PERCENT)
 
+        right_button_pressed_up = controller.buttonRUp.pressing()
+        left_button_pressed_up = controller.buttonLUp.pressing()
+        claw_motor.spin(FORWARD, (right_button_pressed_up - left_button_pressed_up)*50,PERCENT)
 main()
