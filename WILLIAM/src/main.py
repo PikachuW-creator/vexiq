@@ -9,7 +9,9 @@
 
 # Library imports
 from vex import *
-
+JOYSTICK_DEADBAND = 15
+BUTTON_MOTOR_SPEED = 50
+LOOP_SLEEP_MSEC = 20
 # Brain should be defined by default
 brain=Brain()
 right_drive_motor = Motor(Ports.PORT6)
@@ -19,7 +21,7 @@ claw_motor = Motor(Ports.PORT4)
 controller = Controller()
 
 def apply_deadband(value):
-    if abs(value) < 15:
+    if abs(value) < JOYSTICK_DEADBAND:
         return 0 
     else:
         return value
@@ -36,5 +38,6 @@ def main():
 
         right_button_pressed_up = controller.buttonRUp.pressing()
         left_button_pressed_up = controller.buttonLUp.pressing()
-        claw_motor.spin(FORWARD, (right_button_pressed_up - left_button_pressed_up)*50,PERCENT)
+        claw_motor.spin(FORWARD, (right_button_pressed_up - left_button_pressed_up)*BUTTON_MOTOR_SPEED,PERCENT)
+        sleep(LOOP_SLEEP_MSEC)
 main()
