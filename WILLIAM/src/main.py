@@ -61,9 +61,35 @@ def apply_deadband(value):
     else:
         return value
 
+
+
 #brain.screen.print("WILLIAM HELLO!")
+def reset_debug_screen(title):
+    brain.screen.clear_screen()
+    brain.screen.set_cursor(1,1)
+    brain.screen.print(title)
+    brain.screen.next_row()
 
+def write_debug_line(label,value):
+    brain.screen.print(label)
+    brain.screen.print(":") 
+    brain.screen.print(value)
+    brain.screen.next_row()
 
+def show_sesnor_debug():
+
+    reset_debug_screen("Sensor4 Debug")
+
+    if not front_distant_sensor.installed():
+        write_debug_line("DistOK", False)
+
+    if not front_optical_sensor.installed():
+        write_debug_line("OptOK", False)
+
+    if not rear_bumper_switch.installed():
+        write_debug_line("Bumpress",True)    
+
+        
 def main():
     arm_motor.set_stopping(HOLD)
     arm_motor.set_max_torque(CLAW_MAX_TORQUE_PCT, PERCENT)
@@ -93,5 +119,8 @@ def main():
 
         update_side_touchled()
 
+        show_sesnor_debug()
+
         sleep(LOOP_SLEEP_MSEC)
+       
 main()
